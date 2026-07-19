@@ -23,14 +23,13 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache: npm
 
-      # npm 10.9.8 can terminate with "Exit handler never called" on hosted runners.
-      - name: Use stable npm
-        run: npm install --global npm@10.8.0
+      # npm 10 can terminate with "Exit handler never called" on hosted runners.
+      - name: Update npm
+        run: npm install --global npm@11.18.0
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --include=dev --no-audit --no-fund
 
       - name: Validate and build
         run: npm run check
